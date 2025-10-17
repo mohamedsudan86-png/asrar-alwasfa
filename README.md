@@ -14,9 +14,9 @@
   - لوحة تحكم كاملة لإدارة المتجر
 
 ## الروابط
-- **المتجر (واجهة العملاء)**: https://asrar-alwasfa.pages.dev
+- **المتجر (الصفحة الرئيسية - قريباً)**: https://asrar-alwasfa.pages.dev
+- **لوحة التحكم (لإضافة المنتجات)**: https://asrar-alwasfa.pages.dev/admin
 - **المعاينة (الموقع الكامل)**: https://preview.asrar-alwasfa.pages.dev
-- **لوحة التحكم**: https://asrar-alwasfa.pages.dev/admin
 - **لوحة التحكم (المعاينة)**: https://preview.asrar-alwasfa.pages.dev/admin
 - **GitHub Repository**: https://github.com/mohamedsudan86-png/asrar-alwasfa
 - **الكود المصدري**: `/home/user/webapp`

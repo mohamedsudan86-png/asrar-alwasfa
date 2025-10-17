@@ -1,1 +1,18 @@
-h1 { font-family: Arial, Helvetica, sans-serif; }
+/* ملف CSS إضافي للتخصيصات */
+
+/* يمكن إضافة أي تخصيصات CSS إضافية هنا */
+
+/* مثال: تخصيص الألوان */
+:root {
+    --primary-color: #8B4513;
+    --secondary-color: #D2691E;
+    --accent-color: #FFD700;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

@@ -366,135 +366,347 @@ app.get('/', (c) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محامص أسرار الوصفة للقهوة</title>
+    <title>محامص أسرار الوصفة للقهوة - أجود أنواع القهوة والمكسرات</title>
+    <meta name="description" content="محامص أسرار الوصفة للقهوة - نقدم أجود أنواع البن المحمص والمكسرات الطازجة والمخبوزات اللذيذة مع خدمة التوصيل">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
         
         * {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #FFF8F0 0%, #FFFFFF 100%);
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 50%, #A67C52 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,96C1248,75,1344,53,1392,42.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f3f4f6" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,128C672,107,768,85,864,90.7C960,96,1056,128,1152,133.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            padding: 60px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .card-hover {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
         }
         
         .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(107, 68, 35, 0.2);
+            border-color: #A67C52;
+        }
+        
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .product-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        .card-hover:hover .product-image img {
+            transform: scale(1.1);
         }
         
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             left: 20px;
-            background-color: #25D366;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             z-index: 1000;
             cursor: pointer;
             transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6);
+            }
         }
         
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
         }
         
         .cart-badge {
             position: absolute;
             top: -8px;
             right: -8px;
-            background-color: #DC2626;
+            background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
             color: white;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+            animation: bounce 1s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .category-badge {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.9) 0%, rgba(139, 90, 60, 0.9) 100%);
+            backdrop-filter: blur(10px);
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+        
+        .search-box {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8B5A3C 0%, #6B4423 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 68, 35, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #A67C52, transparent);
+            border-radius: 2px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #8B5A3C;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header-logo {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* تحسينات الجوال */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+            
+            .whatsapp-float {
+                bottom: 70px;
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="min-h-screen">
     <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
+    <header class="gradient-bg text-white shadow-2xl sticky top-0 z-50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-5">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-coffee text-3xl"></i>
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                        <i class="fas fa-mug-hot text-4xl text-amber-200"></i>
+                    </div>
                     <div>
-                        <h1 class="text-xl font-bold">محامص أسرار الوصفة</h1>
-                        <p class="text-sm opacity-90">للقهوة والمكسرات والمخبوزات</p>
+                        <h1 class="text-2xl font-black header-logo">محامص أسرار الوصفة</h1>
+                        <p class="text-sm opacity-90 font-semibold">✨ للقهوة والمكسرات والمخبوزات ✨</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button id="cartBtn" class="relative">
+                <div class="flex items-center gap-3">
+                    <button id="cartBtn" class="relative bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all backdrop-blur-sm">
                         <i class="fas fa-shopping-cart text-2xl"></i>
                         <span id="cartCount" class="cart-badge hidden">0</span>
                     </button>
-                    <button id="loginBtn" class="bg-white text-yellow-800 px-4 py-2 rounded-lg font-bold hover:bg-gray-100">
-                        <i class="fas fa-user ml-1"></i>
-                        تسجيل الدخول
+                    <button id="loginBtn" class="bg-white text-amber-900 px-5 py-2.5 rounded-xl font-bold hover:bg-amber-50 transition-all shadow-lg hidden md:flex items-center gap-2">
+                        <i class="fas fa-user"></i>
+                        <span>تسجيل الدخول</span>
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 animate-fade-in">
+                    <i class="fas fa-star text-amber-300"></i>
+                    أجود أنواع القهوة والمكسرات
+                    <i class="fas fa-star text-amber-300"></i>
+                </h2>
+                <p class="text-xl md:text-2xl mb-6 opacity-90 font-semibold">
+                    محمصة بحب وخبرة لتصلك طازجة إلى باب منزلك
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-truck text-amber-300 ml-2"></i>
+                        <span class="font-bold">توصيل سريع</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-shield-alt text-amber-300 ml-2"></i>
+                        <span class="font-bold">جودة مضمونة</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-hand-holding-usd text-amber-300 ml-2"></i>
+                        <span class="font-bold">دفع عند الاستلام</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Search & Filters -->
-    <div class="bg-white shadow-md py-4">
-        <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 -mt-8 mb-8 relative z-20">
+        <div class="bg-white rounded-2xl shadow-2xl p-6">
             <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
+                <div class="flex-1 relative">
+                    <i class="fas fa-search absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     <input 
                         type="text" 
                         id="searchInput" 
-                        placeholder="ابحث عن المنتجات..." 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        placeholder="ابحث عن القهوة، المكسرات، المخبوزات..." 
+                        class="search-box w-full pr-12 pl-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 text-lg"
                     >
                 </div>
-                <select id="categoryFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600">
-                    <option value="">جميع الفئات</option>
-                </select>
+                <div class="relative">
+                    <i class="fas fa-filter absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <select id="categoryFilter" class="search-box pr-12 pl-6 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 text-lg font-semibold cursor-pointer appearance-none bg-white min-w-[200px]">
+                        <option value="">🏷️ جميع الفئات</option>
+                    </select>
+                    <i class="fas fa-chevron-down absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Products Grid -->
-    <main class="container mx-auto px-4 py-8">
-        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- Products Section -->
+    <main class="container mx-auto px-4 pb-16">
+        <div class="text-center mb-10">
+            <h3 class="section-title text-4xl font-black text-gray-800 inline-block">
+                منتجاتنا المميزة
+            </h3>
+            <p class="text-gray-600 text-lg mt-4">اختر من تشكيلتنا الواسعة من المنتجات الطازجة</p>
+        </div>
+        
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <!-- Products will be loaded here -->
         </div>
         
-        <div id="loadingState" class="text-center py-12">
-            <i class="fas fa-spinner fa-spin text-4xl text-yellow-700"></i>
-            <p class="mt-4 text-gray-600">جاري تحميل المنتجات...</p>
+        <div id="loadingState" class="text-center py-20">
+            <div class="loading-spinner mx-auto mb-6"></div>
+            <p class="text-xl text-gray-600 font-semibold">جاري تحميل المنتجات الرائعة...</p>
         </div>
         
-        <div id="emptyState" class="hidden text-center py-12">
-            <i class="fas fa-box-open text-6xl text-gray-300"></i>
-            <p class="mt-4 text-gray-600 text-lg">لا توجد منتجات متاحة</p>
+        <div id="emptyState" class="hidden text-center py-20">
+            <div class="text-8xl mb-6">📦</div>
+            <h4 class="text-2xl font-bold text-gray-700 mb-2">لا توجد منتجات متاحة</h4>
+            <p class="text-gray-500">جرب تغيير الفلتر أو البحث</p>
         </div>
     </main>
 
     <!-- WhatsApp Float Button -->
-    <a href="#" id="whatsappBtn" class="whatsapp-float" title="تواصل معنا عبر واتساب">
-        <i class="fab fa-whatsapp text-3xl"></i>
+    <a href="#" id="whatsappBtn" class="whatsapp-float group" title="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp text-4xl group-hover:scale-110 transition-transform"></i>
     </a>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="hidden fixed bottom-20px right-20px bg-amber-600 hover:bg-amber-700 text-white rounded-full w-14 h-14 shadow-lg transition-all z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
 
     <!-- Login Modal -->
     <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -669,46 +881,91 @@ app.get('/admin', (c) => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
         
         * {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #FFF8F0 0%, #F5F5F5 100%);
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 50%, #A67C52 100%);
+            box-shadow: 0 4px 20px rgba(107, 68, 35, 0.2);
         }
         
         .sidebar-link {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, #A67C52 0%, #8B5A3C 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
         }
         
         .sidebar-link:hover, .sidebar-link.active {
-            background-color: rgba(139, 69, 19, 0.1);
-            border-right: 4px solid #8B4513;
+            background: linear-gradient(90deg, rgba(166, 124, 82, 0.15) 0%, rgba(166, 124, 82, 0.05) 100%);
+            transform: translateX(-5px);
+        }
+        
+        .sidebar-link:hover::before, .sidebar-link.active::before {
+            transform: scaleY(1);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.15);
+            border-color: #A67C52;
+        }
+        
+        .admin-header {
+            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%);
         }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-4 py-4">
+    <header class="admin-header text-white shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-5">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-coffee text-3xl"></i>
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                        <i class="fas fa-tools text-3xl text-amber-200"></i>
+                    </div>
                     <div>
-                        <h1 class="text-xl font-bold">لوحة التحكم</h1>
-                        <p class="text-sm opacity-90">محامص أسرار الوصفة</p>
+                        <h1 class="text-2xl font-black">لوحة التحكم</h1>
+                        <p class="text-sm opacity-90 font-semibold">محامص أسرار الوصفة</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <a href="/" class="bg-white text-yellow-800 px-4 py-2 rounded-lg font-bold hover:bg-gray-100">
-                        <i class="fas fa-home ml-1"></i>
-                        المتجر
+                <div class="flex items-center gap-3">
+                    <a href="/" class="bg-white text-amber-900 px-5 py-2.5 rounded-xl font-bold hover:bg-amber-50 transition-all shadow-lg flex items-center gap-2">
+                        <i class="fas fa-store"></i>
+                        <span class="hidden md:inline">المتجر</span>
                     </a>
-                    <button id="logoutBtn" class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700">
-                        <i class="fas fa-sign-out-alt ml-1"></i>
-                        تسجيل الخروج
+                    <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="hidden md:inline">خروج</span>
                     </button>
                 </div>
             </div>
@@ -746,42 +1003,57 @@ app.get('/admin', (c) => {
         <main class="flex-1 p-8">
             <!-- Dashboard Section -->
             <div id="dashboardSection" class="section">
-                <h2 class="text-3xl font-bold mb-6">لوحة المعلومات</h2>
+                <div class="mb-8">
+                    <h2 class="text-4xl font-black text-gray-800 mb-2">لوحة المعلومات</h2>
+                    <p class="text-gray-600">نظرة سريعة على إحصائيات متجرك</p>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stat-card">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">إجمالي المنتجات</p>
-                                <p class="text-3xl font-bold text-yellow-700" id="totalProducts">0</p>
+                                <p class="text-gray-500 text-sm font-semibold mb-2">إجمالي المنتجات</p>
+                                <p class="text-4xl font-black text-amber-600" id="totalProducts">0</p>
+                                <p class="text-xs text-gray-400 mt-1">منتج نشط</p>
                             </div>
-                            <i class="fas fa-box text-4xl text-yellow-700 opacity-20"></i>
+                            <div class="bg-gradient-to-br from-amber-100 to-amber-50 p-4 rounded-xl">
+                                <i class="fas fa-box text-5xl text-amber-600"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stat-card">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">الطلبات الجديدة</p>
-                                <p class="text-3xl font-bold text-blue-600" id="newOrders">0</p>
+                                <p class="text-gray-500 text-sm font-semibold mb-2">الطلبات الجديدة</p>
+                                <p class="text-4xl font-black text-blue-600" id="newOrders">0</p>
+                                <p class="text-xs text-gray-400 mt-1">بانتظار المعالجة</p>
                             </div>
-                            <i class="fas fa-shopping-bag text-4xl text-blue-600 opacity-20"></i>
+                            <div class="bg-gradient-to-br from-blue-100 to-blue-50 p-4 rounded-xl">
+                                <i class="fas fa-bell text-5xl text-blue-600"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stat-card">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">إجمالي الطلبات</p>
-                                <p class="text-3xl font-bold text-green-600" id="totalOrders">0</p>
+                                <p class="text-gray-500 text-sm font-semibold mb-2">إجمالي الطلبات</p>
+                                <p class="text-4xl font-black text-green-600" id="totalOrders">0</p>
+                                <p class="text-xs text-gray-400 mt-1">طلب كلي</p>
                             </div>
-                            <i class="fas fa-chart-line text-4xl text-green-600 opacity-20"></i>
+                            <div class="bg-gradient-to-br from-green-100 to-green-50 p-4 rounded-xl">
+                                <i class="fas fa-chart-line text-5xl text-green-600"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stat-card">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">الفئات</p>
-                                <p class="text-3xl font-bold text-purple-600" id="totalCategories">0</p>
+                                <p class="text-gray-500 text-sm font-semibold mb-2">الفئات</p>
+                                <p class="text-4xl font-black text-purple-600" id="totalCategories">0</p>
+                                <p class="text-xs text-gray-400 mt-1">فئة نشطة</p>
                             </div>
-                            <i class="fas fa-list text-4xl text-purple-600 opacity-20"></i>
+                            <div class="bg-gradient-to-br from-purple-100 to-purple-50 p-4 rounded-xl">
+                                <i class="fas fa-list text-5xl text-purple-600"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

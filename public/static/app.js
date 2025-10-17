@@ -99,35 +99,80 @@ function renderProducts() {
     document.getElementById('emptyState').classList.add('hidden')
     
     grid.innerHTML = state.products.map(product => `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
-            <div class="relative h-48 bg-gray-200 overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover relative group">
+            <!-- صورة المنتج -->
+            <div class="product-image relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                 ${product.image_url ? 
-                    `<img src="${product.image_url}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 200 200%27%3E%3Crect fill=%27%23e5e7eb%27 width=%27200%27 height=%27200%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2720%27 fill=%27%239ca3af%27%3E${product.name}%3C/text%3E%3C/svg%3E'">` : 
-                    `<div class="w-full h-full flex items-center justify-center">
-                        <i class="fas fa-image text-6xl text-gray-400"></i>
+                    `<img src="${product.image_url}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 200 200%27%3E%3Crect fill=%27%23f3f4f6%27 width=%27200%27 height=%27200%27/%3E%3Ctext x=%2750%25%27 y=%2745%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27Cairo%27 font-size=%2716%27 fill=%27%236b7280%27%3E${product.name}%3C/text%3E%3Ctext x=%2750%25%27 y=%2760%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-size=%2740%27 fill=%27%239ca3af%27%3E☕%3C/text%3E%3C/svg%3E'">` : 
+                    `<div class="w-full h-full flex flex-col items-center justify-center">
+                        <i class="fas fa-mug-hot text-7xl text-amber-200 mb-3"></i>
+                        <span class="text-gray-500 font-bold">${product.name}</span>
                     </div>`
                 }
-                ${!product.is_available ? '<div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"><span class="text-white font-bold text-lg">غير متوفر</span></div>' : ''}
+                
+                <!-- شارة الفئة -->
+                ${product.category_name ? `<div class="category-badge absolute top-3 right-3 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+                    <i class="fas fa-tag ml-1"></i>
+                    ${product.category_name}
+                </div>` : ''}
+                
+                <!-- حالة عدم التوفر -->
+                ${!product.is_available ? `
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-times-circle text-5xl text-red-400 mb-2"></i>
+                            <p class="text-white font-bold text-xl">غير متوفر حالياً</p>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <!-- شارة جديد -->
+                ${product.display_order < 3 ? `
+                    <div class="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                        <i class="fas fa-star ml-1"></i>
+                        جديد
+                    </div>
+                ` : ''}
             </div>
-            <div class="p-4">
-                <div class="text-xs text-gray-500 mb-1">${product.category_name || ''}</div>
-                <h3 class="font-bold text-lg mb-2 text-gray-800">${product.name}</h3>
-                ${product.description ? `<p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>` : ''}
-                <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-yellow-700">${product.price} ريال</span>
+            
+            <!-- معلومات المنتج -->
+            <div class="p-5">
+                <h3 class="font-black text-xl mb-2 text-gray-800 group-hover:text-amber-700 transition-colors line-clamp-1">
+                    ${product.name}
+                </h3>
+                
+                ${product.description ? `
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                        ${product.description}
+                    </p>
+                ` : '<div class="mb-4"></div>'}
+                
+                <div class="flex items-center justify-between border-t pt-4">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">السعر</div>
+                        <div class="price-tag text-3xl font-black">${product.price} ر.س</div>
+                    </div>
+                    
                     ${product.is_available ? 
-                        `<button onclick="addToCart(${product.id})" class="gradient-bg text-white px-4 py-2 rounded-lg font-bold hover:opacity-90 transition">
-                            <i class="fas fa-cart-plus ml-1"></i>
-                            أضف
+                        `<button onclick="addToCart(${product.id})" class="btn-primary text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg relative z-10">
+                            <i class="fas fa-cart-plus ml-2"></i>
+                            أضف للسلة
                         </button>` : 
-                        `<button class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg font-bold cursor-not-allowed" disabled>
+                        `<button class="bg-gray-300 text-gray-600 px-6 py-3 rounded-xl font-bold cursor-not-allowed" disabled>
+                            <i class="fas fa-ban ml-2"></i>
                             غير متوفر
                         </button>`
                     }
                 </div>
             </div>
+            
+            <!-- تأثير الهوفر -->
+            <div class="absolute inset-0 border-2 border-amber-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
         </div>
     `).join('')
+    
+    // إضافة زر العودة للأعلى
+    setupScrollToTop()
 }
 
 // إضافة منتج للسلة
@@ -475,22 +520,81 @@ async function confirmOrder() {
     }
 }
 
-// عرض إشعار
+// زر العودة للأعلى
+function setupScrollToTop() {
+    const scrollBtn = document.getElementById('scrollTopBtn')
+    
+    if (!scrollBtn) return
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.remove('hidden')
+        } else {
+            scrollBtn.classList.add('hidden')
+        }
+    })
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    })
+}
+
+// عرض إشعار محسّن
 function showNotification(message, type = 'info') {
     // إنشاء عنصر الإشعار
     const notification = document.createElement('div')
-    notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50 text-white font-bold transition-all ${
-        type === 'success' ? 'bg-green-600' : 
-        type === 'error' ? 'bg-red-600' : 
-        'bg-blue-600'
-    }`
-    notification.textContent = message
+    
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-times-circle',
+        info: 'fa-info-circle'
+    }
+    
+    const colors = {
+        success: 'bg-gradient-to-r from-green-500 to-emerald-600',
+        error: 'bg-gradient-to-r from-red-500 to-rose-600',
+        info: 'bg-gradient-to-r from-blue-500 to-indigo-600'
+    }
+    
+    notification.className = `fixed top-24 left-1/2 transform -translate-x-1/2 px-8 py-4 rounded-2xl shadow-2xl z-[60] text-white font-bold transition-all ${colors[type]} flex items-center gap-3 animate-slide-down`
+    notification.innerHTML = `
+        <i class="fas ${icons[type]} text-2xl"></i>
+        <span class="text-lg">${message}</span>
+    `
     
     document.body.appendChild(notification)
+    
+    // تأثير الدخول
+    setTimeout(() => {
+        notification.style.transform = 'translate(-50%, 0)'
+    }, 10)
     
     // إزالة الإشعار بعد 3 ثوانٍ
     setTimeout(() => {
         notification.style.opacity = '0'
+        notification.style.transform = 'translate(-50%, -20px)'
         setTimeout(() => notification.remove(), 300)
     }, 3000)
 }
+
+// إضافة styles للتحريك
+const style = document.createElement('style')
+style.textContent = `
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -100px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+    .animate-slide-down {
+        animation: slide-down 0.5s ease-out;
+    }
+`
+document.head.appendChild(style)

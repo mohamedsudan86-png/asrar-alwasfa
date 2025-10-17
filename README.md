@@ -121,15 +121,17 @@ npm run dev:sandbox
 ```
 
 ### النشر على Cloudflare Pages (الإنتاج):
+
+**🚀 دليل سريع (خطوتين فقط):** راجع `SIMPLE_DEPLOY.md`
+
+**📖 دليل مفصل:** راجع `QUICKSTART.md`
+
+**🔑 مشاكل المصادقة؟** راجع `AUTH_FIX.md`
+
+**أو شغّل:**
 ```bash
-# إنشاء قاعدة بيانات D1 في Cloudflare
-wrangler d1 create asrar-alwasfa-production
-
-# تطبيق الـ migrations على قاعدة البيانات الإنتاجية
-npm run db:migrate:prod
-
-# النشر
-npm run deploy
+cd /home/user/webapp
+./deploy.sh
 ```
 
 ## التقنيات المستخدمة

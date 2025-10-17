@@ -15,8 +15,10 @@
 
 ## الروابط
 - **المتجر (واجهة العملاء)**: https://asrar-alwasfa.pages.dev
+- **المعاينة (الموقع الكامل)**: https://preview.asrar-alwasfa.pages.dev
 - **لوحة التحكم**: https://asrar-alwasfa.pages.dev/admin
-- **رابط النشر (Deployment)**: https://88fcdff4.asrar-alwasfa.pages.dev
+- **لوحة التحكم (المعاينة)**: https://preview.asrar-alwasfa.pages.dev/admin
+- **GitHub Repository**: https://github.com/mohamedsudan86-png/asrar-alwasfa
 - **الكود المصدري**: `/home/user/webapp`
 
 ## بيانات تسجيل الدخول

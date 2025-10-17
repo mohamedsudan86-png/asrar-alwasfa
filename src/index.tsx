@@ -862,6 +862,94 @@ app.get('/', (c) => {
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- معلومات المحمصة -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-amber-600 p-3 rounded-xl">
+                            <i class="fas fa-mug-hot text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black">محامص أسرار الوصفة</h3>
+                            <p class="text-sm text-gray-400">للقهوة والمكسرات</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        نقدم لكم أجود أنواع القهوة المحمصة طازجة، والمكسرات الفاخرة، والمخبوزات اللذيذة مع خدمة التوصيل السريع.
+                    </p>
+                </div>
+                
+                <!-- روابط سريعة -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 border-b-2 border-amber-600 pb-2 inline-block">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                الصفحة الرئيسية
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                المنتجات
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                من نحن
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- التواصل -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 border-b-2 border-amber-600 pb-2 inline-block">تواصل معنا</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-green-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </div>
+                            <span>واتساب: متاح 24/7</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-truck text-xl"></i>
+                            </div>
+                            <span>توصيل سريع لجميع المناطق</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-credit-card text-xl"></i>
+                            </div>
+                            <span>دفع عند الاستلام</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 محامص أسرار الوصفة للقهوة. جميع الحقوق محفوظة.
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    صنع بـ <i class="fas fa-heart text-red-500"></i> في المملكة العربية السعودية
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
     <script src="/static/app.js"></script>
 </body>

@@ -366,109 +366,592 @@ app.get('/', (c) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قريباً - محامص أسرار الوصفة للقهوة</title>
+    <title>محامص أسرار الوصفة للقهوة - أجود أنواع القهوة والمكسرات</title>
+    <meta name="description" content="محامص أسرار الوصفة للقهوة - نقدم أجود أنواع البن المحمص والمكسرات الطازجة والمخبوزات اللذيذة مع خدمة التوصيل">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
         
         body {
-            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(180deg, #FFF8F0 0%, #FFFFFF 100%);
         }
         
         .gradient-bg {
             background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 50%, #A67C52 100%);
+            position: relative;
+            overflow: hidden;
         }
         
-        .coffee-animation {
-            animation: float 3s ease-in-out infinite;
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,96C1248,75,1344,53,1392,42.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .hero-section {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 90, 60, 0.95) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f3f4f6" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,128C672,107,768,85,864,90.7C960,96,1056,128,1152,133.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            padding: 60px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .pulse-slow {
-            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
         }
         
-        .fade-in {
-            animation: fadeIn 1s ease-in;
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(107, 68, 35, 0.2);
+            border-color: #A67C52;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .product-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        .card-hover:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6);
+            }
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+            animation: bounce 1s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .category-badge {
+            background: linear-gradient(135deg, rgba(107, 68, 35, 0.9) 0%, rgba(139, 90, 60, 0.9) 100%);
+            backdrop-filter: blur(10px);
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+        
+        .search-box {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 8px 25px rgba(107, 68, 35, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8B5A3C 0%, #6B4423 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 68, 35, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #A67C52, transparent);
+            border-radius: 2px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #8B5A3C;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header-logo {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* تحسينات الجوال */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+            
+            .whatsapp-float {
+                bottom: 70px;
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-2xl w-full text-center fade-in">
-        <!-- أيقونة القهوة -->
-        <div class="coffee-animation mb-8">
-            <i class="fas fa-mug-hot text-9xl text-amber-100 drop-shadow-2xl"></i>
-        </div>
-        
-        <!-- العنوان الرئيسي -->
-        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 drop-shadow-lg">
-            قريباً
-        </h1>
-        
-        <!-- اسم المحمصة -->
-        <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 mb-8 border-2 border-white/20">
-            <h2 class="text-3xl md:text-4xl font-bold text-amber-100 mb-4">
-                ☕ محامص أسرار الوصفة للقهوة
-            </h2>
-            <p class="text-xl text-white/90 leading-relaxed">
-                نعمل حالياً على تجهيز متجرنا الإلكتروني ليقدم لكم أفضل تجربة تسوق
-            </p>
-        </div>
-        
-        <!-- الميزات -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <i class="fas fa-coffee text-4xl text-amber-200 mb-3"></i>
-                <h3 class="text-lg font-bold text-white mb-2">قهوة طازجة</h3>
-                <p class="text-white/80 text-sm">محمصة حديثاً</p>
-            </div>
-            
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <i class="fas fa-shipping-fast text-4xl text-amber-200 mb-3"></i>
-                <h3 class="text-lg font-bold text-white mb-2">توصيل سريع</h3>
-                <p class="text-white/80 text-sm">لباب منزلك</p>
-            </div>
-            
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <i class="fas fa-star text-4xl text-amber-200 mb-3"></i>
-                <h3 class="text-lg font-bold text-white mb-2">جودة عالية</h3>
-                <p class="text-white/80 text-sm">منتجات مميزة</p>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-2xl sticky top-0 z-50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                        <i class="fas fa-mug-hot text-4xl text-amber-200"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-black header-logo">محامص أسرار الوصفة</h1>
+                        <p class="text-sm opacity-90 font-semibold">✨ للقهوة والمكسرات والمخبوزات ✨</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="cartBtn" class="relative bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all backdrop-blur-sm">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span id="cartCount" class="cart-badge hidden">0</span>
+                    </button>
+                    <button id="loginBtn" class="bg-white text-amber-900 px-5 py-2.5 rounded-xl font-bold hover:bg-amber-50 transition-all shadow-lg hidden md:flex items-center gap-2">
+                        <i class="fas fa-user"></i>
+                        <span>تسجيل الدخول</span>
+                    </button>
+                </div>
             </div>
         </div>
-        
-        <!-- زر الواتساب -->
-        <div class="mb-8">
-            <a href="https://wa.me/966500000000" 
-               target="_blank"
-               class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold text-xl px-10 py-5 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 pulse-slow">
-                <i class="fab fa-whatsapp text-3xl"></i>
-                <span>تواصل معنا الآن</span>
-            </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 animate-fade-in">
+                    <i class="fas fa-star text-amber-300"></i>
+                    أجود أنواع القهوة والمكسرات
+                    <i class="fas fa-star text-amber-300"></i>
+                </h2>
+                <p class="text-xl md:text-2xl mb-6 opacity-90 font-semibold">
+                    محمصة بحب وخبرة لتصلك طازجة إلى باب منزلك
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-truck text-amber-300 ml-2"></i>
+                        <span class="font-bold">توصيل سريع</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-shield-alt text-amber-300 ml-2"></i>
+                        <span class="font-bold">جودة مضمونة</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                        <i class="fas fa-hand-holding-usd text-amber-300 ml-2"></i>
+                        <span class="font-bold">دفع عند الاستلام</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- رسالة إضافية -->
-        <p class="text-white/70 text-lg">
-            <i class="fas fa-clock ml-2"></i>
-            نعمل على إضافة جميع منتجاتنا المميزة
-        </p>
-        
-        <!-- Footer -->
-        <div class="mt-12 pt-8 border-t border-white/20">
-            <p class="text-white/60 text-sm">
-                جميع الحقوق محفوظة © 2025 - محامص أسرار الوصفة للقهوة
-            </p>
+    </section>
+
+    <!-- Search & Filters -->
+    <div class="container mx-auto px-4 -mt-8 mb-8 relative z-20">
+        <div class="bg-white rounded-2xl shadow-2xl p-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1 relative">
+                    <i class="fas fa-search absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="ابحث عن القهوة، المكسرات، المخبوزات..." 
+                        class="search-box w-full pr-12 pl-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 text-lg"
+                    >
+                </div>
+                <div class="relative">
+                    <i class="fas fa-filter absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <select id="categoryFilter" class="search-box pr-12 pl-6 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 text-lg font-semibold cursor-pointer appearance-none bg-white min-w-[200px]">
+                        <option value="">🏷️ جميع الفئات</option>
+                    </select>
+                    <i class="fas fa-chevron-down absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Products Section -->
+    <main class="container mx-auto px-4 pb-16">
+        <div class="text-center mb-10">
+            <h3 class="section-title text-4xl font-black text-gray-800 inline-block">
+                منتجاتنا المميزة
+            </h3>
+            <p class="text-gray-600 text-lg mt-4">اختر من تشكيلتنا الواسعة من المنتجات الطازجة</p>
+        </div>
+        
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Products will be loaded here -->
+        </div>
+        
+        <div id="loadingState" class="text-center py-20">
+            <div class="loading-spinner mx-auto mb-6"></div>
+            <p class="text-xl text-gray-600 font-semibold">جاري تحميل المنتجات الرائعة...</p>
+        </div>
+        
+        <div id="emptyState" class="hidden text-center py-20">
+            <div class="text-8xl mb-6">📦</div>
+            <h4 class="text-2xl font-bold text-gray-700 mb-2">لا توجد منتجات متاحة</h4>
+            <p class="text-gray-500">جرب تغيير الفلتر أو البحث</p>
+        </div>
+    </main>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#" id="whatsappBtn" class="whatsapp-float group" title="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp text-4xl group-hover:scale-110 transition-transform"></i>
+    </a>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="hidden fixed bottom-20px right-20px bg-amber-600 hover:bg-amber-700 text-white rounded-full w-14 h-14 shadow-lg transition-all z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">تسجيل الدخول</h2>
+                <button id="closeLogin" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="phoneStep" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">رقم الجوال</label>
+                    <input 
+                        type="tel" 
+                        id="phoneInput" 
+                        placeholder="05xxxxxxxx" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        maxlength="10"
+                    >
+                </div>
+                <button id="sendOtpBtn" class="w-full gradient-bg text-white py-3 rounded-lg font-bold hover:opacity-90">
+                    إرسال رمز التحقق
+                </button>
+            </div>
+            
+            <div id="otpStep" class="hidden space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">رمز التحقق</label>
+                    <input 
+                        type="text" 
+                        id="otpInput" 
+                        placeholder="أدخل الرمز المكون من 6 أرقام" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        maxlength="6"
+                    >
+                    <p class="text-sm text-gray-500 mt-2">تم إرسال رمز التحقق إلى رقم الجوال</p>
+                    <p id="otpDisplay" class="text-sm text-green-600 mt-1 font-bold"></p>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">الاسم (اختياري)</label>
+                    <input 
+                        type="text" 
+                        id="nameInput" 
+                        placeholder="أدخل اسمك" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    >
+                </div>
+                <button id="verifyOtpBtn" class="w-full gradient-bg text-white py-3 rounded-lg font-bold hover:opacity-90">
+                    تحقق وتسجيل الدخول
+                </button>
+                <button id="backToPhone" class="w-full text-gray-600 py-2 hover:text-gray-800">
+                    العودة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-shopping-cart ml-2"></i>
+                    سلة المشتريات
+                </h2>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="space-y-3 mb-4">
+                <!-- Cart items will be loaded here -->
+            </div>
+            
+            <div id="cartEmpty" class="hidden text-center py-8 text-gray-500">
+                <i class="fas fa-shopping-cart text-5xl mb-3"></i>
+                <p>السلة فارغة</p>
+            </div>
+            
+            <div id="cartSummary" class="hidden border-t pt-4">
+                <div class="flex justify-between items-center text-xl font-bold mb-4">
+                    <span>المجموع الكلي:</span>
+                    <span id="cartTotal" class="text-yellow-700">0 ريال</span>
+                </div>
+                <button id="checkoutBtn" class="w-full gradient-bg text-white py-3 rounded-lg font-bold hover:opacity-90">
+                    إتمام الطلب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">إتمام الطلب</h2>
+                <button id="closeCheckout" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">رقم الجوال</label>
+                    <input 
+                        type="tel" 
+                        id="checkoutPhone" 
+                        placeholder="05xxxxxxxx" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    >
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">الاسم</label>
+                    <input 
+                        type="text" 
+                        id="checkoutName" 
+                        placeholder="أدخل اسمك" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    >
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">العنوان</label>
+                    <textarea 
+                        id="checkoutAddress" 
+                        placeholder="أدخل عنوانك الكامل" 
+                        rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    ></textarea>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">ملاحظات (اختياري)</label>
+                    <textarea 
+                        id="checkoutNotes" 
+                        placeholder="أي ملاحظات على الطلب" 
+                        rows="2"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    ></textarea>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                    <p class="text-gray-700 mb-2">المجموع الكلي:</p>
+                    <p class="text-2xl font-bold text-yellow-700" id="checkoutTotal">0 ريال</p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        <i class="fas fa-info-circle ml-1"></i>
+                        الدفع عند الاستلام
+                    </p>
+                </div>
+                <button id="confirmOrderBtn" class="w-full gradient-bg text-white py-3 rounded-lg font-bold hover:opacity-90">
+                    تأكيد الطلب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- معلومات المحمصة -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-amber-600 p-3 rounded-xl">
+                            <i class="fas fa-mug-hot text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black">محامص أسرار الوصفة</h3>
+                            <p class="text-sm text-gray-400">للقهوة والمكسرات</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        نقدم لكم أجود أنواع القهوة المحمصة طازجة، والمكسرات الفاخرة، والمخبوزات اللذيذة مع خدمة التوصيل السريع.
+                    </p>
+                </div>
+                
+                <!-- روابط سريعة -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 border-b-2 border-amber-600 pb-2 inline-block">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                الصفحة الرئيسية
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                المنتجات
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                من نحن
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                                تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- التواصل -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 border-b-2 border-amber-600 pb-2 inline-block">تواصل معنا</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-green-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </div>
+                            <span>واتساب: متاح 24/7</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-truck text-xl"></i>
+                            </div>
+                            <span>توصيل سريع لجميع المناطق</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <div class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-credit-card text-xl"></i>
+                            </div>
+                            <span>دفع عند الاستلام</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 محامص أسرار الوصفة للقهوة. جميع الحقوق محفوظة.
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    صنع بـ <i class="fas fa-heart text-red-500"></i> في المملكة العربية السعودية
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <script src="/static/app.js"></script>
 </body>
 </html>
   `)
